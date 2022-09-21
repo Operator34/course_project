@@ -2,41 +2,42 @@ import React, { useState } from "react";
 import api from "../api"
 
 const Users = () => {
-    const [users, setUsers] = useState(api.users.fetchAll())
-    
-    const numberOfPeople =() => {
-        return users.length===0?<h3>Никто с тобой не тусанет</h3>:<h3>{users.length} {renderPhrase(users.length)} с тобой сегодня</h3>
-    }
-
-    const getBageNumberOfPeopleClasses = () => {
-        let classes = 'badge m-2 '
-        classes+=users.length===0?'bg-danger':'bg-primary'
-        return classes
-    }
+    const [users, setUsers] = useState(api.users.fetchAll());
 
     const handleDelete = (userId) => {
-        setUsers(users.filter((user) => user._id !==userId))
-     };
+        setUsers(users.filter((user) => user._id !== userId));
+    };
+
     const renderPhrase = (number) => {
-        const lastNumber = Number(number.toString().slice(-1));
-        if (number > 4 && number < 15) return 'человек тусанет';
-        if (lastNumber === 2 || lastNumber===3 || lastNumber === 4) return 'человека тусанут'
-        if (lastNumber === 1) return 'человек тусанет'
-        return 'человек тусанет'    
-    }
+        const lastOne = Number(number.toString().slice(-1));
+        if (number > 4 && number < 15) return "человек тусанет";
+        if ([2, 3, 4].indexOf(lastOne) >= 0) return "человека тусанут";
+        if (lastOne === 1) return "человек тусанет";
+        return "человек тусанет";
+    };
 
     return (
-        <div>
-            <span className={getBageNumberOfPeopleClasses()}>{numberOfPeople()}</span>
+        <>
+            <h2>
+                <span
+                    className={"badge " + (users.length > 0 ? "bg-primary" : "bg-danger")}
+                >
+                    {users.length > 0
+                        ? `${users.length + " " + renderPhrase(users.length)} с тобой сегодня`
+                        : "Никто с тобой не тусанет"}
+                </span>
+            </h2>
+
             {users.length > 0 && (
                 <table className="table">
                     <thead>
                         <tr>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Качества</th>
-                        <th scope="col">Профессия</th>
-                        <th scope="col">Встретился, раз</th>
-                        <th scope="col">Оценка</th>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Качества</th>
+                            <th scope="col">Профессия</th>
+                            <th scope="col">Встретился, раз</th>
+                            <th scope="col">Оценка</th>
+                            <th />
                         </tr>
                     </thead>
                     <tbody>
@@ -45,27 +46,29 @@ const Users = () => {
                             <td>{user.name}</td>
                             <td>
                                 {user.qualities.map((item) => (
-                                    <span className={"badge m-2 bg-"+item.color} key = {item._id}>
+                                    <span className={"badge m-1 bg-" + item.color} key={item._id}>
                                         {item.name}
                                     </span>
                                 ))}
                             </td>
                             <td>{user.profession.name}</td>
                             <td>{user.completedMeetings}</td>
-                            <td>{user.rate}</td>
+                            <td>{user.rate} /5</td>
                             <td>
-                                <button className="btn btn-danger" onClick={() => handleDelete(user._id)}>
+                                <button
+                                    onClick={() => handleDelete(user._id)}
+                                    className="btn btn-danger"
+                                >
                                     delete
                                 </button>
                             </td>
-                            </tr>
+                        </tr>
                         ))}
                     </tbody>
-                    
                 </table>
             )}
-        </div> 
-        
-    )       
-}
-export default Users
+        </>
+    );
+};
+
+export default Users;
