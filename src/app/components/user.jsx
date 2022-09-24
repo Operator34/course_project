@@ -1,13 +1,12 @@
 import React from "react";
+
 import Quality from "./qualitie"
 import BookMark from "./bookmark";
-
-
 
 const User = (props) => {
 
     const {user, onDelete} = props
-    //console.log(props);
+
     return(
         
         <tr key={user._id}>
@@ -29,9 +28,6 @@ const User = (props) => {
                     user={user}
                     onHandleBookmark = {props.onHandleBookmark}
                 />
-                
-                
-              
         </td>
         <td>
             <button
