@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import api from "../api/index"
 import SearchStatus from "./searchStatus";
+import HeadTable from "./headTable";
 
 import User from "./user"
 
@@ -24,19 +25,9 @@ const Users = () => {
         <SearchStatus
             userCount = {userCount}
          />
-            {users.length > 0 && (
+            {userCount > 0 && (
                 <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Имя</th>
-                            <th scope="col">Качества</th>
-                            <th scope="col">Профессия</th>
-                            <th scope="col">Встретился, раз</th>
-                            <th scope="col">Оценка</th>
-                            <th scope="col">Избранное</th>
-                            <th />
-                        </tr>
-                    </thead>
+                <HeadTable />
                     <tbody>
                         {users.map((user) => (
                             <User 
