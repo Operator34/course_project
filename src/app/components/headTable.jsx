@@ -1,6 +1,6 @@
 import React from "react";
 
-const HeadTable = (props) => {
+const HeadTable = () => {
     return(
         <thead>
             <tr>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import api from "../api/index"
-import SearchStatus from "./searchStatus";
+import PartyStatus from "./partyStatus";
 
 import User from "./user"
 import HeadTable from "./headTable";
@@ -32,7 +32,7 @@ const Users = () => {
 
     return (
         <>
-        <SearchStatus
+        <PartyStatus
             userCount = {userCount}
         />
             {userCount > 0 && (

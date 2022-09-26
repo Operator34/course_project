@@ -25,7 +25,8 @@ const User = (props) => {
         <td>    
                 <BookMark 
                     key={user._id} 
-                    user={user}
+                    id={user._id}
+                    bookmark={user.bookmark}
                     onHandleBookmark = {props.onHandleBookmark}
                 />
         </td>

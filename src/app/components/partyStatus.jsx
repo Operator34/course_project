@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchStatus = (props) => {
+const PartyStatus = (props) => {
     const {userCount : count} = props
     
     const renderPhrase = (number) => {
@@ -23,4 +23,4 @@ return (
 )
 }
 
-export default SearchStatus
+export default PartyStatus
