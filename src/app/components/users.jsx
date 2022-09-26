@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import api from "../api/index"
 import SearchStatus from "./searchStatus";
-import HeadTable from "./headTable";
 
 import User from "./user"
+import HeadTable from "./headTable";
+import Pagination from "./pagination";
+import paginate from "../utils/paginate";
 
 const Users = () => {
     
     const [users, setUsers] = useState(api.users.fetchAll());
-    console.log(users);
     const userCount = users.length
+    const pageSize = 4
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const handlePageChange = (pageIndex) => {
+        setCurrentPage(pageIndex)
+    }
+
+    const userCrop = paginate(users,currentPage,pageSize)
+
 
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId));
@@ -24,12 +34,12 @@ const Users = () => {
         <>
         <SearchStatus
             userCount = {userCount}
-         />
+        />
             {userCount > 0 && (
                 <table className="table">
                 <HeadTable />
                     <tbody>
-                        {users.map((user) => (
+                        {userCrop.map((user) => (
                             <User 
                             key={user._id}
                             user={user}
@@ -40,6 +50,12 @@ const Users = () => {
                     </tbody>
                 </table>
             )}
+            <Pagination 
+            itemsCount={userCount}
+            pageSize={pageSize}
+            currentPage = {currentPage}
+            onPageChange={handlePageChange}
+            />
         </>
     );
 };
