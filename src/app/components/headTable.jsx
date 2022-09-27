@@ -1,7 +1,7 @@
 import React from "react";
 
 const HeadTable = () => {
-    return(
+    return (
         <thead>
             <tr>
                 <th scope="col">Имя</th>
@@ -13,7 +13,6 @@ const HeadTable = () => {
                 <th />
             </tr>
         </thead>
-    )
-
-}
-export default HeadTable
+    );
+};
+export default HeadTable;
