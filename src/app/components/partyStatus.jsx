@@ -1,8 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const PartyStatus = (props) => {
-    const { userCount: count } = props;
-
+const PartyStatus = ({ userCount: count }) => {
     const renderPhrase = (number) => {
         const lastOne = Number(number.toString().slice(-1));
         if (number > 4 && number < 15) return "человек тусанет";
@@ -21,6 +20,10 @@ const PartyStatus = (props) => {
             </span>
         </h2>
     );
+};
+
+PartyStatus.propTypes = {
+    userCount: PropTypes.number.isRequired
 };
 
 export default PartyStatus;

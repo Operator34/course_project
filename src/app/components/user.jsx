@@ -1,11 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-import Quality from "./qualitie";
+import Quality from "./quality";
 import BookMark from "./bookmark";
 
-const User = (props) => {
-    const { user, onDelete } = props;
-
+const User = ({ user, onDelete, onHandleBookmark }) => {
     return (
         <tr key={user._id}>
             <td>{user.name}</td>
@@ -22,7 +21,7 @@ const User = (props) => {
                     key={user._id}
                     id={user._id}
                     bookmark={user.bookmark}
-                    onHandleBookmark={props.onHandleBookmark}
+                    onHandleBookmark={onHandleBookmark}
                 />
             </td>
             <td>
@@ -35,6 +34,12 @@ const User = (props) => {
             </td>
         </tr>
     );
+};
+
+User.propTypes = {
+    user: PropTypes.object.isRequired,
+    onDelete: PropTypes.func.isRequired,
+    onHandleBookmark: PropTypes.func.isRequired
 };
 
 export default User;

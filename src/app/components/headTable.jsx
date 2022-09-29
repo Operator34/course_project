@@ -4,12 +4,12 @@ const HeadTable = () => {
     return (
         <thead>
             <tr>
-                <th scope="col">Имя</th>
-                <th scope="col">Качества</th>
-                <th scope="col">Профессия</th>
-                <th scope="col">Встретился, раз</th>
-                <th scope="col">Оценка</th>
-                <th scope="col">Избранное</th>
+                <th>Имя</th>
+                <th>Качества</th>
+                <th>Профессия</th>
+                <th>Встретился, раз</th>
+                <th>Оценка</th>
+                <th>Избранное</th>
                 <th />
             </tr>
         </thead>
