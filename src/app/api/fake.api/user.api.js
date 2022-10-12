@@ -150,6 +150,4 @@ const fetchAll = () =>
         }, 500);
     });
 
-export default {
-    fetchAll
-};
+export default { fetchAll };
