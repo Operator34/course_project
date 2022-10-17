@@ -4,10 +4,16 @@ import PropTypes from "prop-types";
 import Quality from "./quality";
 import BookMark from "./bookmark";
 
-const User = ({ user, onDelete, onHandleBookmark }) => {
+const User = ({
+    user,
+    onDelete,
+    onHandleBookmark,
+    id,
+    name
+}) => {
     return (
-        <tr key={user._id}>
-            <td>{user.name}</td>
+        <tr key={id}>
+            <td>{name}</td>
             <td>
                 {user.qualities.map((quality) => (
                     <Quality key={quality._id} {...quality} />
@@ -39,7 +45,9 @@ const User = ({ user, onDelete, onHandleBookmark }) => {
 User.propTypes = {
     user: PropTypes.object.isRequired,
     onDelete: PropTypes.func.isRequired,
-    onHandleBookmark: PropTypes.func.isRequired
+    onHandleBookmark: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
 };
 
 export default User;

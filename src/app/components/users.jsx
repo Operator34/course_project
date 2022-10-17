@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import _ from "lodash";
 
 import api from "../api/index";
 import PartyStatus from "./partyStatus";
@@ -12,7 +13,10 @@ const Users = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfession] = useState();
     const [selectedProf, setSelectedProf] = useState();
-    const pageSize = 2;
+    const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
+    console.log(sortBy, { ...sortBy });
+
+    const pageSize = 8;
     useEffect(() => {
         api.professions.fetchAll().then((data) => setProfession(data));
         api.users.fetchAll().then((data) => setUsers(data));
@@ -28,12 +32,18 @@ const Users = () => {
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
     };
-    console.log(selectedProf, users);
+    const handleSort = (item) => {
+        setSortBy(item);
+        console.log(sortBy, item);
+    };
+    // console.log(selectedProf, users);
     const filteredUsers = selectedProf
         ? users.filter((user) => user.profession._id === selectedProf._id)
         : users;
+    const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+    console.log(sortedUsers);
     const userCount = filteredUsers.length;
-    const userCrop = paginate(filteredUsers, currentPage, pageSize);
+    const userCrop = paginate(sortedUsers, currentPage, pageSize);
 
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId));
@@ -73,8 +83,11 @@ const Users = () => {
                 {userCount > 0 && (
                     <UsersTable
                         items={userCrop}
+                        onSort={handleSort}
                         handleDelete={handleDelete}
                         handleBookmark={handleBookmark}
+                        selectedSort={sortBy}
+                        users={users}
                     />
                 )}
                 <div className="d-flex justify-content-center">

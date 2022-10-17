@@ -1,20 +1,33 @@
 import React from "react";
 import User from "./user";
 import PropTypes from "prop-types";
-const UsersTable = ({ items, handleBookmark, handleDelete }) => {
+import TableHeader from "./tableHeader";
+import TableBody from "./tableBody";
+
+const UsersTable = ({
+    items,
+    onSort,
+    selectedSort,
+    handleBookmark,
+    handleDelete,
+    users
+}) => {
+    const columns = {
+        name: { path: "name", name: "Имя" },
+        qualities: { name: "Качества" },
+        professions: { path: "profession.name", name: "Профессия" },
+        completedMeetings: {
+            path: "completedMeetings",
+            name: "Встретился, раз"
+        },
+        rate: { path: "rate", name: "Оценка" },
+        bookmark: { path: "bookmark", name: "Избранное" },
+        delete: {}
+    };
     return (
         <table className="table">
-            <thead>
-                <tr>
-                    <th>Имя</th>
-                    <th>Качества</th>
-                    <th>Профессия</th>
-                    <th>Встретился, раз</th>
-                    <th>Оценка</th>
-                    <th>Избранное</th>
-                    <th />
-                </tr>
-            </thead>
+            <TableHeader {...{ onSort, selectedSort, columns }} />
+            <TableBody {...{ columns, data: users }} />
             <tbody>
                 {items.map((user) => (
                     <User
@@ -22,6 +35,8 @@ const UsersTable = ({ items, handleBookmark, handleDelete }) => {
                         user={user}
                         onDelete={handleDelete}
                         onHandleBookmark={handleBookmark}
+                        id={user._id}
+                        name={user.name}
                     />
                 ))}
             </tbody>
@@ -31,6 +46,9 @@ const UsersTable = ({ items, handleBookmark, handleDelete }) => {
 UsersTable.propTypes = {
     items: PropTypes.array.isRequired,
     handleBookmark: PropTypes.func.isRequired,
-    handleDelete: PropTypes.func.isRequired
+    handleDelete: PropTypes.func.isRequired,
+    selectedSort: PropTypes.object.isRequired,
+    onSort: PropTypes.func.isRequired,
+    users: PropTypes.array.isRequired
 };
 export default UsersTable;
