@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 
 const TableBody = ({ data, columns }) => {
+    console.log("data:", data, "columns:", columns);
     return (
         <tbody>
             {data.map((item) => (

@@ -14,7 +14,6 @@ const Users = () => {
     const [professions, setProfession] = useState();
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
-    console.log(sortBy, { ...sortBy });
 
     const pageSize = 8;
     useEffect(() => {
@@ -34,14 +33,13 @@ const Users = () => {
     };
     const handleSort = (item) => {
         setSortBy(item);
-        console.log(sortBy, item);
     };
     // console.log(selectedProf, users);
     const filteredUsers = selectedProf
         ? users.filter((user) => user.profession._id === selectedProf._id)
         : users;
     const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
-    console.log(sortedUsers);
+    // console.log(sortedUsers);
     const userCount = filteredUsers.length;
     const userCrop = paginate(sortedUsers, currentPage, pageSize);
 

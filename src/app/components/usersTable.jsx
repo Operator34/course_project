@@ -1,5 +1,5 @@
 import React from "react";
-import User from "./user";
+// import User from "./user";
 import PropTypes from "prop-types";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
@@ -28,7 +28,7 @@ const UsersTable = ({
         <table className="table">
             <TableHeader {...{ onSort, selectedSort, columns }} />
             <TableBody {...{ columns, data: users }} />
-            <tbody>
+            {/* <tbody>
                 {items.map((user) => (
                     <User
                         key={user._id}
@@ -39,7 +39,7 @@ const UsersTable = ({
                         name={user.name}
                     />
                 ))}
-            </tbody>
+            </tbody> */}
         </table>
     );
 };
