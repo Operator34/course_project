@@ -38,7 +38,7 @@ const Users = () => {
     const filteredUsers = selectedProf
         ? users.filter((user) => user.profession._id === selectedProf._id)
         : users;
-    const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+    const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
     // console.log(sortedUsers);
     const userCount = filteredUsers.length;
     const userCrop = paginate(sortedUsers, currentPage, pageSize);
@@ -46,12 +46,13 @@ const Users = () => {
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId));
     };
-    const handleBookmark = (userId) => {
+    const handleBookmark = (id) => {
         setUsers(
             users.map((user) => {
-                return user._id === userId
-                    ? { ...user, bookmark: !user.bookmark }
-                    : user;
+                if (user._id === id) {
+                    return { ...user, bookmark: !user.bookmark };
+                }
+                return user;
             })
         );
     };

@@ -4,13 +4,7 @@ import PropTypes from "prop-types";
 import Quality from "./quality";
 import BookMark from "./bookmark";
 
-const User = ({
-    user,
-    onDelete,
-    onHandleBookmark,
-    id,
-    name
-}) => {
+const User = ({ user, onDelete, onHandleBookmark, id, name }) => {
     return (
         <tr key={id}>
             <td>{name}</td>
@@ -31,12 +25,12 @@ const User = ({
                 />
             </td>
             <td>
-                <button
+                {/* <button
                     onClick={() => onDelete(user._id)}
                     className="btn btn-danger"
                 >
                     delete
-                </button>
+                </button> */}
             </td>
         </tr>
     );

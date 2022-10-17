@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
+import Bookmark from "./bookmark";
 
 const UsersTable = ({
     items,
@@ -10,8 +11,10 @@ const UsersTable = ({
     selectedSort,
     handleBookmark,
     handleDelete,
-    users
+    users,
+    ...rest
 }) => {
+    console.log("items:", items, "users", users);
     const columns = {
         name: { path: "name", name: "Имя" },
         qualities: { name: "Качества" },
@@ -21,8 +24,27 @@ const UsersTable = ({
             name: "Встретился, раз"
         },
         rate: { path: "rate", name: "Оценка" },
-        bookmark: { path: "bookmark", name: "Избранное" },
-        delete: {}
+        bookmark: {
+            path: "bookmark",
+            name: "Избранное",
+            component: (user) => (
+                <Bookmark
+                    id={user._id}
+                    onHandleBookmark={handleBookmark}
+                    bookmark={user.bookmark}
+                />
+            )
+        },
+        delete: {
+            component: (user) => (
+                <button
+                    onClick={() => handleDelete(user._id)}
+                    className="btn btn-danger"
+                >
+                    delete
+                </button>
+            )
+        }
     };
     return (
         <table className="table">
