@@ -26,7 +26,7 @@ const Users = () => {
 
     const handleProfessionSelect = (item) => {
         setSelectedProf(item);
-        console.log(item);
+        console.log("item:", item);
     };
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
@@ -34,12 +34,12 @@ const Users = () => {
     const handleSort = (item) => {
         setSortBy(item);
     };
-    // console.log(selectedProf, users);
+    console.log("selectedProf:", selectedProf, "users:", users);
     const filteredUsers = selectedProf
         ? users.filter((user) => user.profession._id === selectedProf._id)
         : users;
     const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
-    // console.log(sortedUsers);
+    console.log("sortedUsers:", sortedUsers);
     const userCount = filteredUsers.length;
     const userCrop = paginate(sortedUsers, currentPage, pageSize);
 

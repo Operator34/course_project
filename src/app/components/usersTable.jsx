@@ -11,11 +11,9 @@ const UsersTable = ({
     onSort,
     selectedSort,
     handleBookmark,
-    handleDelete,
-    users,
-    ...rest
+    handleDelete
 }) => {
-    console.log("items:", items, "users", users);
+    console.log("items:", items);
     const columns = {
         name: { path: "name", name: "Имя" },
         qualities: {
@@ -53,19 +51,7 @@ const UsersTable = ({
     return (
         <table className="table">
             <TableHeader {...{ onSort, selectedSort, columns }} />
-            <TableBody {...{ columns, data: users }} />
-            {/* <tbody>
-                {items.map((user) => (
-                    <User
-                        key={user._id}
-                        user={user}
-                        onDelete={handleDelete}
-                        onHandleBookmark={handleBookmark}
-                        id={user._id}
-                        name={user.name}
-                    />
-                ))}
-            </tbody> */}
+            <TableBody {...{ columns, data: items }} />
         </table>
     );
 };
@@ -74,7 +60,6 @@ UsersTable.propTypes = {
     handleBookmark: PropTypes.func.isRequired,
     handleDelete: PropTypes.func.isRequired,
     selectedSort: PropTypes.object.isRequired,
-    onSort: PropTypes.func.isRequired,
-    users: PropTypes.array.isRequired
+    onSort: PropTypes.func.isRequired
 };
 export default UsersTable;
