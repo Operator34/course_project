@@ -1,19 +1,17 @@
 import React from "react";
-// import User from "./user";
 import PropTypes from "prop-types";
-import TableHeader from "./tableHeader";
-import TableBody from "./tableBody";
 import Bookmark from "./bookmark";
 import QualitiesList from "./qualitiesList";
+import Table from "./table";
 
 const UsersTable = ({
-    items,
+    user,
     onSort,
     selectedSort,
     handleBookmark,
-    handleDelete
+    onDelete
 }) => {
-    console.log("items:", items);
+    console.log("user:", user);
     const columns = {
         name: { path: "name", name: "Имя" },
         qualities: {
@@ -40,7 +38,7 @@ const UsersTable = ({
         delete: {
             component: (user) => (
                 <button
-                    onClick={() => handleDelete(user._id)}
+                    onClick={() => onDelete(user._id)}
                     className="btn btn-danger"
                 >
                     delete
@@ -49,16 +47,21 @@ const UsersTable = ({
         }
     };
     return (
-        <table className="table">
-            <TableHeader {...{ onSort, selectedSort, columns }} />
-            <TableBody {...{ columns, data: items }} />
-        </table>
+        <Table
+            onSort={onSort}
+            selectedSort={selectedSort}
+            columns={columns}
+            data={user}
+        />
+        /* //TableHeader {...{ onSort, selectedSort, columns }} />
+        //<TableBody {...{ columns, data: user }} /> */
+        /* </Table> */
     );
 };
 UsersTable.propTypes = {
-    items: PropTypes.array.isRequired,
+    user: PropTypes.array.isRequired,
     handleBookmark: PropTypes.func.isRequired,
-    handleDelete: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
     selectedSort: PropTypes.object.isRequired,
     onSort: PropTypes.func.isRequired
 };
