@@ -51,7 +51,7 @@ const Users = () => {
         );
     };
 
-    if (users) {
+    if (users.length) {
         const filteredUsers = selectedProf
             ? users.filter((user) => user.profession._id === selectedProf._id)
             : users;
