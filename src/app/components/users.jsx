@@ -27,7 +27,7 @@ const Users = () => {
 
     const handleProfessionSelect = (user) => {
         setSelectedProf(user);
-        console.log("user:", user);
+        // console.log("user:", user);
     };
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
@@ -59,7 +59,7 @@ const Users = () => {
             [sortBy.path],
             [sortBy.order]
         );
-        console.log("sortedUsers:", sortedUsers);
+        // console.log("sortedUsers:", sortedUsers);
         const userCount = filteredUsers.length;
         const userCrop = paginate(sortedUsers, currentPage, pageSize);
 

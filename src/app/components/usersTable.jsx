@@ -12,7 +12,7 @@ const UsersTable = ({
     handleBookmark,
     onDelete
 }) => {
-    console.log("user:", user);
+    // console.log("user:", user);
     const columns = {
         name: {
             path: "name",

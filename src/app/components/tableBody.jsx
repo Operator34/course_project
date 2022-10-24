@@ -13,7 +13,7 @@ const TableBody = ({ data, columns }) => {
         }
         return _.get(item, columns[column].path);
     };
-    console.log("data:", data, "columns:", columns);
+    // console.log("data:", data, "columns:", columns);
     return (
         <tbody>
             {data.map((item) => (

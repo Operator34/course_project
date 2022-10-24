@@ -5,7 +5,7 @@ import UserPage from "../components/userPage";
 
 const UsersNav = () => {
     const { userId } = useParams();
-    return userId ? <UserPage /> : <Users />;
+    return userId ? <UserPage userId={userId} /> : <Users />;
 };
 
 export default UsersNav;
