@@ -1,25 +1,28 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
-import Main from "../layouts/main";
-import Login from "../layouts/login";
-import UsersNav from "../layouts/usersNav";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
     return (
-        <div>
-            <button>
-                <Link to="/"> Main </Link>
-            </button>
-            <button>
-                <Link to="/login"> Login </Link>
-            </button>
-            <button>
-                <Link to="/users"> Users </Link>
-            </button>
-            <Route path={"/"} component={Main} />
-            <Route path={"/login"} component={Login} />
-            <Route path={"/users"} component={UsersNav} />
-        </div>
+        <ul className="nav">
+            <li className="nav-item">
+                <Link to="/" className="nav-link active" aria-current="page">
+                    {" "}
+                    Main{" "}
+                </Link>
+            </li>
+            <li className="nav-item">
+                <Link to="/login" className="nav-link active">
+                    {" "}
+                    Login{" "}
+                </Link>
+            </li>
+            <li className="nav-item">
+                <Link to="/users" className="nav-link active">
+                    {" "}
+                    Users{" "}
+                </Link>
+            </li>
+        </ul>
     );
 };
 
