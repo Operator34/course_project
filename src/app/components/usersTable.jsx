@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Bookmark from "./bookmark";
 import QualitiesList from "./qualitiesList";
@@ -13,7 +14,13 @@ const UsersTable = ({
 }) => {
     console.log("user:", user);
     const columns = {
-        name: { path: "name", name: "Имя" },
+        name: {
+            path: "name",
+            name: "Имя",
+            component: (user) => (
+                <Link to={`users/${user._id}`}>{user.name}</Link>
+            )
+        },
         qualities: {
             name: "Качества",
             component: (user) => <QualitiesList qualities={user.qualities} />
@@ -53,9 +60,6 @@ const UsersTable = ({
             columns={columns}
             data={user}
         />
-        /* //TableHeader {...{ onSort, selectedSort, columns }} />
-        //<TableBody {...{ columns, data: user }} /> */
-        /* </Table> */
     );
 };
 UsersTable.propTypes = {

@@ -35,7 +35,6 @@ const Users = () => {
     const handleSort = (user) => {
         setSortBy(user);
     };
-    // console.log("selectedProf:", selectedProf, "users:", users);
 
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId));

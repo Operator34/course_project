@@ -1,6 +1,14 @@
 import React from "react";
+import api from "../api/index";
+import { useParams } from "react-router-dom";
 
 const UserPage = () => {
+    const params = useParams();
+    console.log(api);
+    console.log("params", params.userId);
+    api.users.getById(params.userId).then((user) => console.log(user));
+    // const [users, setUsers] = useState([]);
+    // console.log(users);
     return (
         <>
             <h1>Имя</h1>
