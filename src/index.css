@@ -11,3 +11,8 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
 }
+
+input.passField {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}

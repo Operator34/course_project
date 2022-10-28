@@ -74,6 +74,7 @@ const Login = () => {
                             value={data.password}
                             onChange={handleChange}
                             error={errors.password}
+                            classes="passField"
                         />
                         <button
                             type="submit"
