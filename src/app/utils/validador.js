@@ -11,6 +11,11 @@ export function validador(data, config) {
                 if (!emailRexExp.test(data)) return config.message;
                 break;
             }
+            case "isCapitalSymbol": {
+                const capitalRexExp = /[A-Z]+/g;
+                if (!capitalRexExp.test(data)) return config.message;
+                break;
+            }
 
             default:
                 break;

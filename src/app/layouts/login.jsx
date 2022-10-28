@@ -24,6 +24,9 @@ const Login = () => {
         password: {
             isRequired: {
                 message: "Поле пароль обязательно для заполнения"
+            },
+            isCapitalSymbol: {
+                message: "Пароль должен содержать хотябы одну заглавную букву"
             }
         }
     };
