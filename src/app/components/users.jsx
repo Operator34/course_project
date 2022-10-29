@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
@@ -8,6 +9,7 @@ import UsersTable from "./usersTable";
 import Pagination from "./pagination";
 import paginate from "../utils/paginate";
 import GroupList from "./groupList";
+import SearchString from "./searhString";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -15,6 +17,16 @@ const Users = () => {
     const [professions, setProfession] = useState();
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
+    const [searchString, setSearchString] = useState("");
+    const handleSearchSubmit = (e) => {
+        setSearchString(e.target.value);
+        console.log(searchString);
+    };
+    // console.log("users", users);
+    // console.log("currentPage", currentPage);
+    // console.log("professions", professions);
+    // console.log("selectedProf", selectedProf);
+    // console.log("sortBy", sortBy);
 
     const pageSize = 8;
     useEffect(() => {
@@ -27,6 +39,7 @@ const Users = () => {
 
     const handleProfessionSelect = (user) => {
         setSelectedProf(user);
+        setSearchString("");
         // console.log("user:", user);
     };
     const handlePageChange = (pageIndex) => {
@@ -51,9 +64,14 @@ const Users = () => {
     };
 
     if (users.length) {
-        const filteredUsers = selectedProf
+        const filteredUsers = searchString
+            ? users.filter((user) =>
+                  user.name.toLowerCase().includes(searchString.toLowerCase())
+              )
+            : selectedProf
             ? users.filter((user) => user.profession._id === selectedProf._id)
             : users;
+
         const sortedUsers = _.orderBy(
             filteredUsers,
             [sortBy.path],
@@ -86,6 +104,10 @@ const Users = () => {
                 )}
                 <div className="d-flex flex-column">
                     <PartyStatus userCount={userCount} />
+                    <SearchString
+                        value={searchString}
+                        handleSearchSubmit={handleSearchSubmit}
+                    />
                     {userCount > 0 && (
                         <UsersTable
                             user={userCrop}
