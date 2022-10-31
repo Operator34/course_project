@@ -3,15 +3,15 @@ import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 
-import api from "../api/index";
-import PartyStatus from "./partyStatus";
-import UsersTable from "./usersTable";
-import Pagination from "./pagination";
-import paginate from "../utils/paginate";
-import GroupList from "./groupList";
-import SearchString from "./searhString";
+import api from "../../../api";
+import PartyStatus from "../../ui/partyStatus";
+import UsersTable from "../../ui/usersTable";
+import Pagination from "../../common/pagination";
+import paginate from "../../../utils/paginate";
+import GroupList from "../../common/groupList";
+import SearchString from "../../ui/searchString";
 
-const Users = () => {
+const UsersListPage = () => {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfession] = useState();
@@ -21,6 +21,7 @@ const Users = () => {
     const handleSearchSubmit = (e) => {
         setSearchString(e.target.value);
         console.log(searchString);
+        setSelectedProf("");
     };
     // console.log("users", users);
     // console.log("currentPage", currentPage);
@@ -132,8 +133,8 @@ const Users = () => {
     return "LOADING...";
 };
 
-Users.propTypes = {
+UsersListPage.propTypes = {
     users: PropTypes.array
 };
 
-export default Users;
+export default UsersListPage;
