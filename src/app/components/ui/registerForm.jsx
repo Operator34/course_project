@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { validador } from "../../utils/validador";
 import TextField from "../common/form/textField";
+import api from "../../api";
+import SelectField from "../common/form/selectField";
 
 const RegisterForm = () => {
-    const [data, setData] = useState({ email: "", password: "" });
+    const [data, setData] = useState({
+        email: "",
+        password: "",
+        profession: ""
+    });
     const [errors, setErrors] = useState({});
+    const [professions, setProfession] = useState();
+    useEffect(() => {
+        api.professions.fetchAll().then((data) => setProfession(data));
+    }, []);
+    // useEffect(() => {
+    //     console.log(professions);
+    // }, [professions]);
     const handleChange = ({ target }) => {
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value
         }));
-        console.log(target.name);
+        // console.log(target.name);
     };
     const validatorConfig = {
         email: {
@@ -35,6 +48,11 @@ const RegisterForm = () => {
                 message: "Пароль должен содержать не менее восьми символов",
                 value: 8
             }
+        },
+        profession: {
+            isRequired: {
+                message: "Обязательно выберите вашу профессию"
+            }
         }
     };
     useEffect(() => {
@@ -46,7 +64,7 @@ const RegisterForm = () => {
         return Object.keys(errors).length === 0;
     };
     const isValid = Object.keys(errors).length === 0;
-    console.log(isValid);
+    // console.log(isValid);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -72,6 +90,15 @@ const RegisterForm = () => {
                 error={errors.password}
                 classes="passField"
             />
+            <SelectField
+                onChange={handleChange}
+                options={professions}
+                defaultOption="Сhoose..."
+                error={errors.profession}
+                value={data.profession}
+                label="Выберите свою профессию"
+            />
+
             <button
                 type="submit"
                 disabled={!isValid}
