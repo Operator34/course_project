@@ -9,7 +9,7 @@ const UserPage = ({ userId }) => {
     useEffect(() => {
         api.users.getById(userId).then((user) => {
             setUser(user);
-            console.log(user);
+            // console.log(user);
         });
     }, []);
     if (user) {

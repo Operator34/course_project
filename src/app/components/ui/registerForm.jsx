@@ -106,6 +106,7 @@ const RegisterForm = () => {
                 onChange={handleChange}
                 options={professions}
                 defaultOption="Сhoose..."
+                name="profession"
                 error={errors.profession}
                 value={data.profession}
                 label="Выберите свою профессию"
@@ -127,6 +128,7 @@ const RegisterForm = () => {
                 onChange={handleChange}
                 options={qualities}
                 label="Выберите ваши качества"
+                defaultValue={data.qualities}
             />
             <CheckBoxField
                 name="licence"
