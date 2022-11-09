@@ -195,8 +195,4 @@ const getById = (id) =>
             );
         }, 1000);
     });
-export default {
-    fetchAll,
-    getById,
-    update
-};
+export default { fetchAll, getById, update };

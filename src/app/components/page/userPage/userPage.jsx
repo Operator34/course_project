@@ -9,7 +9,7 @@ const UserPage = ({ userId }) => {
     useEffect(() => {
         api.users.getById(userId).then((user) => {
             setUser(user);
-            // console.log(user);
+            console.log(user);
         });
     }, []);
     if (user) {
@@ -20,8 +20,12 @@ const UserPage = ({ userId }) => {
                 <Qualities qualities={user.qualities} />
                 <p>completedMeetings: {user.completedMeetings}</p>
                 <h2>Rate: {user.rate}</h2>
-                <Link to={"/users"} className="btn btn-primary" role="button">
-                    Все пользователи
+                <Link
+                    to={`/users/${user._id}/edit`}
+                    className="btn btn-primary"
+                    role="button"
+                >
+                    Изменить
                 </Link>
             </>
         );
