@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { validador } from "../../utils/validador";
+import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import api from "../../api";
 import SelectField from "../common/form/selectField";
@@ -84,7 +84,7 @@ const RegisterForm = () => {
         validate();
     }, [data]);
     const validate = () => {
-        const errors = validador(data, validatorConfig);
+        const errors = validator(data, validatorConfig);
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };

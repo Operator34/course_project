@@ -1,5 +1,5 @@
 /* eslint-disable */
-export function validador(data, config) {
+export function validator(data, config) {
     const errors = {};
     function validate(validateMethod, data, config) {
         let statusValidate;

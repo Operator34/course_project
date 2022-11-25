@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import api from "../../api";
 
-import { validador } from "../../utils/validador";
+import { validator } from "../../utils/validator";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
 import MultiSelectField from "../common/form/multiSelectField";
@@ -77,7 +77,7 @@ const EditUserForm = ({ userId }) => {
         validate();
     }, [data]);
     const validate = () => {
-        const errors = validador(data, validatorConfig);
+        const errors = validator(data, validatorConfig);
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };
