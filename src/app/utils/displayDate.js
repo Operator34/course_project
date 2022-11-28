@@ -24,7 +24,7 @@ export function displayDate(data) {
             return ` ${date.getHours()}:${date.getMinutes()}`;
         }
         return ` ${date.toLocaleString("default", {
-            month: "2-digit",
+            month: "long",
             day: "numeric"
         })}`;
     }
