@@ -29,7 +29,7 @@ const fetchAll = () =>
         window.setTimeout(function () {
             resolve(comments);
         }, 200);
-    });
+    }); // получение всех комментов
 
 const fetchCommentsForUser = (userId) =>
     new Promise((resolve) => {
@@ -40,7 +40,7 @@ const fetchCommentsForUser = (userId) =>
                 )
             );
         }, 200);
-    });
+    }); // получем комменты для страницы определеного пользователя
 const add = (data) =>
     new Promise((resolve) => {
         window.setTimeout(function () {
@@ -54,7 +54,7 @@ const add = (data) =>
             localStorage.setItem("comments", JSON.stringify(comments));
             resolve(newComment);
         }, 200);
-    });
+    }); // метод для создания нового комментария
 
 const remove = (id) =>
     new Promise((resolve) => {
@@ -66,7 +66,7 @@ const remove = (id) =>
             localStorage.setItem("comments", JSON.stringify(newComments));
             resolve(id);
         }, 200);
-    });
+    }); // метод для удаления комментарии
 export default {
     fetchAll,
     fetchCommentsForUser,
