@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
-import _ from "lodash";
 import PropTypes from "prop-types";
+import _ from "lodash";
 
 import api from "../../../api";
 import PartyStatus from "../../ui/partyStatus";
@@ -10,39 +10,55 @@ import Pagination from "../../common/pagination";
 import paginate from "../../../utils/paginate";
 import GroupList from "../../common/groupList";
 import SearchString from "../../ui/searchString";
+import { useUser } from "../../../hooks/useUsers";
 
 const UsersListPage = () => {
-    const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfession] = useState();
+    const [searchString, setSearchString] = useState("");
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
-    const [searchString, setSearchString] = useState("");
-    const handleSearchSubmit = (e) => {
-        setSearchString(e.target.value);
-        console.log(searchString);
-        setSelectedProf("");
-    };
-    // console.log("users", users);
-    // console.log("currentPage", currentPage);
-    // console.log("professions", professions);
-    // console.log("selectedProf", selectedProf);
-    // console.log("sortBy", sortBy);
-
     const pageSize = 8;
+
+    const { users } = useUser();
+
+    // useEffect(() => {
+    //     api.users.fetchAll().then((data) => setUsers(data));
+    // }, []);
+
+    const handleDelete = (userId) => {
+        // setUsers(users.filter((user) => user._id !== userId));
+        console.log(userId);
+    };
+
+    const handleBookmark = (id) => {
+        const newArray = users.map((user) => {
+            if (user._id === id) {
+                return { ...user, bookmark: !user.bookmark };
+            }
+            return user;
+        });
+        // setUsers(newArray)
+        console.log(newArray);
+    };
+
     useEffect(() => {
         api.professions.fetchAll().then((data) => setProfession(data));
-        api.users.fetchAll().then((data) => setUsers(data));
     }, []);
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedProf]);
+    }, [selectedProf, searchString]);
 
-    const handleProfessionSelect = (user) => {
-        setSelectedProf(user);
-        setSearchString("");
-        // console.log("user:", user);
+    const handleProfessionSelect = (item) => {
+        if (searchString !== "") setSearchString("");
+        setSelectedProf(item);
     };
+
+    const handleSearchSubmit = ({ target }) => {
+        setSelectedProf(undefined);
+        setSearchString(target.value);
+    };
+
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
     };
@@ -50,21 +66,7 @@ const UsersListPage = () => {
         setSortBy(user);
     };
 
-    const handleDelete = (userId) => {
-        setUsers(users.filter((user) => user._id !== userId));
-    };
-    const handleBookmark = (id) => {
-        setUsers(
-            users.map((user) => {
-                if (user._id === id) {
-                    return { ...user, bookmark: !user.bookmark };
-                }
-                return user;
-            })
-        );
-    };
-
-    if (users.length) {
+    if (users) {
         const filteredUsers = searchString
             ? users.filter((user) =>
                   user.name.toLowerCase().includes(searchString.toLowerCase())
@@ -78,7 +80,7 @@ const UsersListPage = () => {
             [sortBy.path],
             [sortBy.order]
         );
-        // console.log("sortedUsers:", sortedUsers);
+
         const userCount = filteredUsers.length;
         const userCrop = paginate(sortedUsers, currentPage, pageSize);
 
