@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 const ProfessionContext = React.createContext();
 
 export const useProfessions = () => {
+    // console.log("useProfessions:", useContext(ProfessionContext));
     return useContext(ProfessionContext);
 };
 export const ProfessionProvider = ({ children }) => {
@@ -36,7 +37,9 @@ export const ProfessionProvider = ({ children }) => {
     async function getProfessionsList() {
         try {
             const { content } = await ProfessionService.get();
+            console.log("content professions", content);
             setProfessions(content);
+            // console.log("professions после set:", setProfessions);
             setLoading(false);
         } catch (error) {
             errorCatcher(error);
