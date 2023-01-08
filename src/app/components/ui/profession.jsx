@@ -7,7 +7,7 @@ const Profession = ({ id }) => {
     const prof = getProfession(id);
     if (!isLoading) {
         return <p>{prof.name}</p>;
-    } else return "LOADING2...";
+    } else return "Loading Prof...";
 };
 
 Profession.propTypes = {
