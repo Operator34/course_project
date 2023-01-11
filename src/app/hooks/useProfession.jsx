@@ -37,7 +37,7 @@ export const ProfessionProvider = ({ children }) => {
     async function getProfessionsList() {
         try {
             const { content } = await ProfessionService.get();
-            console.log("content professions", content);
+            // console.log("content professions", content);
             setProfessions(content);
             // console.log("professions после set:", setProfessions);
             setLoading(false);
