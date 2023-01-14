@@ -5,7 +5,7 @@ import QualityService from "./../services/qualities.service";
 
 const QualityContext = React.createContext();
 
-export const useQuality = () => {
+export const useQualities = () => {
     // console.log("useQuality:", useContext(QualityContext));
     return useContext(QualityContext);
 };

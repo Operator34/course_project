@@ -8,26 +8,28 @@ import Users from "./layouts/users";
 import { ToastContainer } from "react-toastify";
 import { ProfessionProvider } from "./hooks/useProfession";
 import { QualityProvider } from "./hooks/useQuality";
+import AuthProvider from "./hooks/useAuth";
 
 const App = () => {
     return (
         <>
-            <NavBar />
+            <AuthProvider>
+                <NavBar />
 
-            <ProfessionProvider>
-                <QualityProvider>
-                    <Switch>
-                        <Route
-                            path={"/users/:userId?/:edit?"}
-                            component={Users}
-                        />
-                        <Route path={"/login/:type?"} component={Login} />
-                        <Route exact path={"/"} component={Main} />
-                        <Redirect to={"/"} />
-                    </Switch>
-                </QualityProvider>
-            </ProfessionProvider>
-
+                <ProfessionProvider>
+                    <QualityProvider>
+                        <Switch>
+                            <Route
+                                path={"/users/:userId?/:edit?"}
+                                component={Users}
+                            />
+                            <Route path={"/login/:type?"} component={Login} />
+                            <Route exact path={"/"} component={Main} />
+                            <Redirect to={"/"} />
+                        </Switch>
+                    </QualityProvider>
+                </ProfessionProvider>
+            </AuthProvider>
             <ToastContainer />
         </>
     );

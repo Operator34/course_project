@@ -21,14 +21,14 @@ export const ProfessionProvider = ({ children }) => {
         }
     }, [error]);
 
-    useEffect(() => {
-        getProfessionsList();
-    }, []);
-
     function errorCatcher(error) {
         const { message } = error.response.data;
         setError(message);
     }
+
+    useEffect(() => {
+        getProfessionsList();
+    }, []);
 
     function getProfession(id) {
         return professions.find((p) => p._id === id);

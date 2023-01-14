@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useQuality } from "../../../hooks/useQuality";
+import { useQualities } from "../../../hooks/useQuality";
 const Quality = ({ id }) => {
     // console.log("id", id);
-    const { getQuality } = useQuality();
+    const { getQuality } = useQualities();
     const qual = getQuality(id);
     // console.log("qual", qual);
 

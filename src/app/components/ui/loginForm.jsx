@@ -4,6 +4,7 @@ import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
 
 const LoginForm = () => {
+    // console.log(process.env);
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -52,7 +53,7 @@ const LoginForm = () => {
         return Object.keys(errors).length === 0;
     };
     const isValid = Object.keys(errors).length === 0;
-    console.log(isValid);
+    // console.log(isValid);
 
     const handleSubmit = (e) => {
         e.preventDefault();
